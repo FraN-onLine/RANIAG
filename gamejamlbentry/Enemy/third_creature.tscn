@@ -1,22 +1,20 @@
-[gd_scene load_steps=8 format=3 uid="uid://donc5nia1q2wn"]
+[gd_scene load_steps=9 format=3 uid="uid://donc5nia1q2wn"]
 
 [ext_resource type="Script" uid="uid://d2fdxaqonnpib" path="res://Enemy/third_creature.gd" id="1_pv7c6"]
 [ext_resource type="PackedScene" uid="uid://ygi0h704mijm" path="res://Misc/healthbar.tscn" id="2_pv7c6"]
 [ext_resource type="PackedScene" uid="uid://dj6sosj2h8uwk" path="res://Enemy/homing_projectile.tscn" id="2_thbbj"]
-[ext_resource type="Texture2D" uid="uid://culsnh5rfip15" path="res://Assets/Mobs/kapre/kapre-draft_1.png" id="3_o7d5a"]
-[ext_resource type="Texture2D" uid="uid://bb2evjjnvp412" path="res://Assets/Mobs/kapre/kapre2-draft_2.png" id="4_yym6h"]
+[ext_resource type="Texture2D" uid="uid://brjmv0wqim87r" path="res://Assets/Mobs/tiyanak/tiyanak2.png" id="4_yym6h"]
+[ext_resource type="Texture2D" uid="uid://dqenmmv3rpm6f" path="res://Assets/Mobs/tiyanak/tiyanak3.png" id="5_as6ne"]
+[ext_resource type="Texture2D" uid="uid://cbdtuk74r34ps" path="res://Assets/Mobs/tiyanak/tiyanak1.png" id="5_yym6h"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_o7d5a"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("3_o7d5a")
+"texture": ExtResource("5_yym6h")
 }, {
 "duration": 1.0,
 "texture": ExtResource("4_yym6h")
-}, {
-"duration": 1.0,
-"texture": ExtResource("3_o7d5a")
 }],
 "loop": true,
 "name": &"attack",
@@ -24,7 +22,13 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("3_o7d5a")
+"texture": ExtResource("5_yym6h")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_yym6h")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_as6ne")
 }],
 "loop": true,
 "name": &"idle",
@@ -32,18 +36,18 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yym6h"]
-height = 28.0
+height = 20.0
 
 [node name="thirdCreature" type="CharacterBody2D"]
 script = ExtResource("1_pv7c6")
 projectile_scene = ExtResource("2_thbbj")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-scale = Vector2(0.028, 0.028)
+scale = Vector2(0.0374375, 0.0374375)
 sprite_frames = SubResource("SpriteFrames_o7d5a")
-animation = &"attack"
+animation = &"idle"
 autoplay = "idle"
-frame_progress = 0.64446
+frame_progress = 0.263266
 
 [node name="Hitbox" type="Area2D" parent="."]
 

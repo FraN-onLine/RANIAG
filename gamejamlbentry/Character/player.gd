@@ -16,6 +16,14 @@ var is_dead = false
 var stage = 1
 var death_position: Vector2
 
+var attack = 12.5
+var multiplier = 1
+var is_dashing = false
+var dash_speed = 500.0
+var dash_time = 0.18
+var dash_timer = 0.0
+var dash_direction = Vector2.ZERO
+
 func _ready():
 	health = max_health
 	is_dead = false
@@ -30,8 +38,23 @@ func _ready():
 		print("Weapon hitbox not found! Check node path.")
 
 func _process(delta):
+	$Hand/Node2D/Sprite2D/weaponHitbox._set_damage(attack * multiplier)
 	if is_dead:
 		return  # Prevent input/movement when dead
+
+	if is_dashing:
+		var collision = move_and_collide(dash_direction * dash_speed * delta)
+		if collision:
+			is_dashing = false
+			if is_instance_valid(weapon_hitbox):
+				weapon_hitbox.monitoring = false
+		else:
+			dash_timer -= delta
+			if dash_timer <= 0:
+				is_dashing = false
+				if is_instance_valid(weapon_hitbox):
+					weapon_hitbox.monitoring = false
+		return # Skip normal movement while dashing
 
 	var input_vector = Vector2.ZERO
 	input_vector.x = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
@@ -59,10 +82,18 @@ func _input(event):
 	if is_dead:
 		return
 
-	if event.is_action_pressed("basic_attack"):
-		attacking = true
-		if is_instance_valid(weapon_hitbox):
-			weapon_hitbox.monitoring = true
+	if event.is_action_pressed("basic_attack") and not is_dashing:
+		var mouse_pos = get_global_mouse_position()
+		var dash_vec = (mouse_pos - global_position)
+		if dash_vec.length() > 0:
+			is_dashing = true
+			dash_timer = dash_time
+			dash_direction = dash_vec.normalized()
+			$AnimatedSprite2D.play("dash") # If you have a dash animation
+			# Flip sprite to dash direction
+			$AnimatedSprite2D.flip_h = dash_direction.x < 0
+			if is_instance_valid(weapon_hitbox):
+				weapon_hitbox.monitoring = true
 	elif event.is_action_released("basic_attack"):
 		attacking = false
 		if is_instance_valid(weapon_hitbox):
@@ -97,6 +128,10 @@ func take_damage(damage):
 
 		print("Unit is dead!")
 		stage += 1
+		max_health -= 10
+		multiplier += 0.1
+		if is_instance_valid(healthbar):
+			healthbar.init_health(max_health)
 
 		await get_tree().create_timer(5.0).timeout
 
