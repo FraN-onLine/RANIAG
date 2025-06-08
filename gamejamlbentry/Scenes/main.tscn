@@ -1,18 +1,21 @@
-[gd_scene load_steps=24 format=4 uid="uid://cpox1ufgx837r"]
+[gd_scene load_steps=27 format=4 uid="uid://cpox1ufgx837r"]
 
 [ext_resource type="Texture2D" uid="uid://buwut2qoj3db" path="res://Assets/Murky/IMG_7429.PNG" id="5_21xkr"]
 [ext_resource type="Texture2D" uid="uid://2ewunr5o4w8g" path="res://Assets/Murky/IMG_7428.PNG" id="5_344ge"]
 [ext_resource type="Texture2D" uid="uid://c78h4gwuyyf4m" path="res://Assets/Murky/IMG_7427.PNG" id="5_kry3j"]
-[ext_resource type="Texture2D" uid="uid://c4r6x00kb3g7p" path="res://Assets/Backgrounds/Backgrounds/Tilesets/TilesetHole.png" id="6_344ge"]
+[ext_resource type="Texture2D" uid="uid://c4r6x00kb3g7p" path="res://Assets/Backgrounds/Animated/Tilesets/TilesetHole.png" id="6_344ge"]
 [ext_resource type="Texture2D" uid="uid://dmclklf5rbqps" path="res://Assets/Murky/IMG_7438.PNG" id="6_ynf5e"]
-[ext_resource type="Texture2D" uid="uid://bkuujj4wtwagh" path="res://Assets/Backgrounds/Backgrounds/Tilesets/Interior/TilesetInterior.png" id="9_ynf5e"]
-[ext_resource type="Texture2D" uid="uid://dhrd6s8prbao1" path="res://Assets/Backgrounds/Backgrounds/Tilesets/Interior/TilesetWallSimple.png" id="10_6iyac"]
+[ext_resource type="Texture2D" uid="uid://bkuujj4wtwagh" path="res://Assets/Backgrounds/Animated/Tilesets/Interior/TilesetInterior.png" id="9_ynf5e"]
+[ext_resource type="Texture2D" uid="uid://dhrd6s8prbao1" path="res://Assets/Backgrounds/Animated/Tilesets/Interior/TilesetWallSimple.png" id="10_6iyac"]
 [ext_resource type="PackedScene" uid="uid://dcsk8ndtlfdua" path="res://Character/Player.tscn" id="10_fdnlq"]
 [ext_resource type="PackedScene" uid="uid://br806ppqkh0au" path="res://Enemy/Nuno.tscn" id="12_6iyac"]
 [ext_resource type="PackedScene" uid="uid://dfpr2luqs5djf" path="res://Scenes/minimapBetter.tscn" id="12_b3802"]
 [ext_resource type="Texture2D" uid="uid://cua761oa7tb8d" path="res://Assets/Backgrounds/Backgrounds/Tilesets/Interior/TilesetWallSimple copy.png" id="12_jkdf5"]
 [ext_resource type="PackedScene" uid="uid://donc5nia1q2wn" path="res://Enemy/third_creature.tscn" id="13_fdnlq"]
-[ext_resource type="PackedScene" uid="uid://dj5rgvavsc5qx" path="res://Scenes/sword.tscn" id="16_k12tt"]
+[ext_resource type="PackedScene" uid="uid://xfb2khu115sd" path="res://Enemy/ancientspirit.tscn" id="14_jkdf5"]
+[ext_resource type="PackedScene" uid="uid://d4a7ds4d21lvn" path="res://Misc/HealthPickup.tscn" id="14_wsu2k"]
+[ext_resource type="PackedScene" uid="uid://t3wjyimjd53k" path="res://Misc/SpeedPickup.tscn" id="15_wsu2k"]
+[ext_resource type="PackedScene" uid="uid://b5pycbqowldip" path="res://Misc/atk_pickup.tscn" id="16_k12tt"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_kry3j"]
 texture = ExtResource("5_21xkr")
@@ -1082,9 +1085,6 @@ y_sort_enabled = true
 player = NodePath("../../Player")
 zoom = -4
 
-[node name="Sword" parent="." instance=ExtResource("16_k12tt")]
-position = Vector2(-1, -5)
-
 [node name="Player" parent="." groups=["Player", "minimap_objects"] instance=ExtResource("10_fdnlq")]
 
 [node name="Trees" type="TileMap" parent="."]
@@ -1130,3 +1130,21 @@ position = Vector2(97, -698)
 
 [node name="thirdCreature3" parent="." instance=ExtResource("13_fdnlq")]
 position = Vector2(-9, -760)
+
+[node name="ancientspirit" parent="." instance=ExtResource("14_jkdf5")]
+position = Vector2(-101, -10)
+
+[node name="HealthPickup" parent="." instance=ExtResource("14_wsu2k")]
+position = Vector2(-1, -103)
+collision_layer = 32
+collision_mask = 2
+
+[node name="SpeedPickup" parent="." instance=ExtResource("15_wsu2k")]
+position = Vector2(-204, 58)
+collision_layer = 32
+collision_mask = 2
+
+[node name="AtkPickup" parent="." instance=ExtResource("16_k12tt")]
+position = Vector2(-106, 62)
+collision_layer = 32
+collision_mask = 2

@@ -6,8 +6,15 @@ signal healthChanged
 
 @onready var healthbar: ProgressBar = $Healthbar
 @onready var weapon_hitbox: Area2D = $Hand/Node2D/Sprite2D/weaponHitbox
-@export var speed: float = 200.0
+@export var base_speed: float = 200.0
+@export var base_attack: int = 10
 @export var camera: Camera2D
+
+var speed: float = base_speed
+var attack_damage: int = base_attack
+
+var is_speed_buffed: bool = false
+var is_attack_buffed: bool = false
 
 var max_health = 100
 var health = 100
@@ -20,6 +27,8 @@ func _ready():
 	health = max_health
 	is_dead = false
 	GameState.player_alive = true
+	speed = base_speed
+	attack_damage = base_attack
 
 	if is_instance_valid(healthbar):
 		healthbar.init_health(max_health)
@@ -36,7 +45,7 @@ func _process(delta):
 	var input_vector = Vector2.ZERO
 	input_vector.x = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
 	input_vector.y = Input.get_action_strength("move_down") - Input.get_action_strength("move_up")
-	
+
 	input_vector = input_vector.normalized() * speed if input_vector.length() > 0 else Vector2.ZERO
 	velocity = input_vector
 	move_and_slide()
@@ -68,8 +77,9 @@ func _input(event):
 		if is_instance_valid(weapon_hitbox):
 			weapon_hitbox.monitoring = false
 
-func set_damage(amount):
-	$Hand/Node2D/Sprite2D/Area2D.damage = amount  # Only call this if node exists
+func set_damage(amount = attack_damage):
+	if is_instance_valid(weapon_hitbox):
+		weapon_hitbox.damage = amount
 
 func take_damage(damage):
 	if is_dead:
@@ -105,6 +115,17 @@ func take_damage(damage):
 		else:
 			get_tree().change_scene_to_file("res://Scenes/YouDIEDMOTHERFUCKA.tscn")
 
+func add_health(amount: int):
+	if is_dead:
+		return
+
+	health = min(health + amount, max_health)
+
+	if is_instance_valid(healthbar):
+		healthbar._set_health(health)
+
+	emit_signal("healthChanged", health)
+
 func respawn():
 	position = death_position
 	health = max_health
@@ -117,3 +138,30 @@ func respawn():
 
 	$AnimatedSprite2D.visible = true
 	emit_signal("healthChanged", health)
+
+# -------------------------------
+# Buff Functions (TEMPORARY)
+# -------------------------------
+func apply_speed_buff(multiplier: float, duration: float):
+	if is_speed_buffed:
+		return
+	is_speed_buffed = true
+	speed *= multiplier
+	print("Speed buff applied! New speed:", speed)
+
+	await get_tree().create_timer(duration).timeout
+	speed = base_speed
+	is_speed_buffed = false
+	print("Speed buff ended. Speed reset to:", speed)
+
+func apply_attack_buff(multiplier: float, duration: float):
+	if is_attack_buffed:
+		return
+	is_attack_buffed = true
+	attack_damage *= multiplier
+	print("Attack buff applied! New damage:", attack_damage)
+
+	await get_tree().create_timer(duration).timeout
+	attack_damage = base_attack
+	is_attack_buffed = false
+	print("Attack buff ended. Damage reset to:", attack_damage)

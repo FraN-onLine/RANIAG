@@ -1,0 +1,65 @@
+[gd_scene load_steps=13 format=3 uid="uid://t3wjyimjd53k"]
+
+[ext_resource type="Texture2D" uid="uid://bubhor07lrd4b" path="res://Assets/Pickups/speed/frame1.png" id="1_5eah2"]
+[ext_resource type="Script" uid="uid://dcoupgx10wqc2" path="res://Misc/speed_pickup.gd" id="1_8ffqx"]
+[ext_resource type="Texture2D" uid="uid://bhnfqp82paelj" path="res://Assets/Pickups/speed/frame2.png" id="2_8ffqx"]
+[ext_resource type="Texture2D" uid="uid://bk0eiyk31jetn" path="res://Assets/Pickups/speed/frame3.png" id="3_vdx1d"]
+[ext_resource type="Texture2D" uid="uid://ci4ufx6mj47h2" path="res://Assets/Pickups/speed/frame4.png" id="4_3kijh"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_goh4g"]
+atlas = ExtResource("1_5eah2")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_buafx"]
+atlas = ExtResource("2_8ffqx")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tfx2i"]
+atlas = ExtResource("3_vdx1d")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y7lvj"]
+atlas = ExtResource("4_3kijh")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pbqm0"]
+atlas = ExtResource("1_5eah2")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_nh1wd"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_goh4g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_buafx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tfx2i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y7lvj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pbqm0")
+}],
+"loop": true,
+"name": &"default",
+"speed": 11.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_aisw3"]
+size = Vector2(9.75, 9.75)
+
+[node name="SpeedPickup" type="Area2D"]
+script = ExtResource("1_8ffqx")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_nh1wd")
+autoplay = "default"
+frame = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.514595, -0.37591)
+shape = SubResource("RectangleShape2D_aisw3")
