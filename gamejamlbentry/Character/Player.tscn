@@ -132,6 +132,8 @@ frame_progress = 0.43429
 
 [node name="HitBox" type="Area2D" parent="."]
 disable_mode = 2
+collision_layer = 9
+collision_mask = 9
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
 shape = SubResource("CapsuleShape2D_713gb")

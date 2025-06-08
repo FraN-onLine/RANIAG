@@ -7,7 +7,7 @@ signal healthChanged
 @onready var healthbar: ProgressBar = $Healthbar
 @onready var weapon_hitbox: Area2D = $Hand/Node2D/Sprite2D/weaponHitbox
 @export var base_speed: float = 200.0
-@export var base_attack: int = 10
+@export var base_attack: int = 12.5
 @export var camera: Camera2D
 
 var speed: float = base_speed
@@ -23,7 +23,6 @@ var is_dead = false
 var stage = 1
 var death_position: Vector2
 
-var attack = 12.5
 var multiplier = 1
 var is_dashing = false
 var dash_speed = 500.0
@@ -47,7 +46,7 @@ func _ready():
 		print("Weapon hitbox not found! Check node path.")
 
 func _process(delta):
-	$Hand/Node2D/Sprite2D/weaponHitbox._set_damage(attack * multiplier)
+	$Hand/Node2D/Sprite2D/weaponHitbox._set_damage(base_attack * multiplier)
 	if is_dead:
 		return  # Prevent input/movement when dead
 
