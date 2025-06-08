@@ -112,16 +112,16 @@ script/source = "extends Sprite2D
 "
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ly6k5"]
-radius = 11.9709
-height = 41.4061
+radius = 7.76578
+height = 19.844
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pusnx"]
 radius = 6.0
 height = 20.0
 
 [node name="Player" type="CharacterBody2D"]
-collision_layer = 138
-collision_mask = 141
+collision_layer = 10
+collision_mask = 13
 script = ExtResource("1_schp4")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -132,8 +132,6 @@ frame_progress = 0.43429
 
 [node name="HitBox" type="Area2D" parent="."]
 disable_mode = 2
-collision_layer = 9
-collision_mask = 9
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
 shape = SubResource("CapsuleShape2D_713gb")
@@ -155,19 +153,12 @@ scale = Vector2(0.228328, 0.228328)
 texture = ExtResource("5_ly6k5")
 
 [node name="weaponHitbox" type="Area2D" parent="Hand/Node2D/Sprite2D"]
-visible = false
 collision_layer = 0
-<<<<<<< HEAD
-collision_mask = 15
-=======
-collision_mask = 143
->>>>>>> 5e8f74a41365dab4259b21c94a0a891c9b4f1959
+collision_mask = 4
 script = ExtResource("4_dvofn")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hand/Node2D/Sprite2D/weaponHitbox"]
-light_mask = 15
-visibility_layer = 15
-position = Vector2(8.75934, 3.09153)
+position = Vector2(1.94651, 1.03051)
 rotation = -1.28922
 shape = SubResource("CapsuleShape2D_ly6k5")
 

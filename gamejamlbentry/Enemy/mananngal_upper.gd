@@ -11,7 +11,7 @@ signal healthChanged
 @export var projectile_scene: PackedScene
 
 var max_health = 100
-var health = 100
+var health = 150
 var shoot_timer = 0.0
 var hover_angle = 0.0
 var hover_speed = 1.0 # radians per second

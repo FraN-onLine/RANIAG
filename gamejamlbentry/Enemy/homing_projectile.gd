@@ -7,8 +7,6 @@ var direction: Vector2 = Vector2.RIGHT
 
 func _ready():
 	connect("area_entered", Callable(self, "_on_area_entered"))
-	
-	
 
 func _process(delta):
 	if target and is_instance_valid(target):
@@ -28,4 +26,7 @@ func set_target(t):
 
 
 func _on_body_entered(body: Node2D) -> void:
-	queue_free()
+	if body in get_tree().get_nodes_in_group("Player"):
+		pass
+	else:
+		queue_free()

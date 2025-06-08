@@ -2,9 +2,9 @@ extends CharacterBody2D
 
 class_name MananngalLower
 
-@export var pulse_visible_time: float = 2.0
+@export var pulse_visible_time: float = 1.5
 @export var pulse_invisible_time: float = 2.0
-@export var heal_amount: float = 15.0
+@export var heal_amount: float = 20.0
 @export var heal_interval: float = 2.0
 @export var boss_search_radius: float = 400.0
 @export var small_mob_scene: PackedScene
