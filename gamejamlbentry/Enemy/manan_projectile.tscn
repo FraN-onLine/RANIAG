@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://whedhdfeu7la"]
+
+[ext_resource type="Script" uid="uid://cq8fk7fc82fg0" path="res://Enemy/manan_projectile.gd" id="1_1ouqu"]
+
+[sub_resource type="Gradient" id="Gradient_qrwv7"]
+offsets = PackedFloat32Array(0.422078, 0.668831, 1)
+colors = PackedColorArray(0.501885, 0.269208, 0.159253, 1, 0.324675, 0.324675, 0.324675, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_4jx06"]
+gradient = SubResource("Gradient_qrwv7")
+width = 1
+height = 1
+fill_from = Vector2(0.298165, 0.385321)
+fill_to = Vector2(0.53211, 0.733945)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fc30t"]
+radius = 6.0
+
+[node name="Area2D" type="Area2D"]
+script = ExtResource("1_1ouqu")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(2.38419e-07, -7.15256e-07)
+scale = Vector2(7.5, 8.5)
+texture = SubResource("GradientTexture2D_4jx06")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_fc30t")
